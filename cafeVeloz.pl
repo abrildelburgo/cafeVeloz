@@ -53,23 +53,18 @@ nivelFalopez(omeprazol, 5).
 
 %PUNTO2
 puedeSerSuspendido(Jugador):-
-	jugador(Jugador),
-	tomo(Jugador,sustancia(Sustancia)),
-	sustanciaProhibida(Sustancia).
-puedeSerSuspendido(Jugador):-
-	jugador(Jugador),
-	tomo(Jugador,compuesto(Compuesto)),
-	compuestoConSustanciaProhibida(Compuesto).
-puedeSerSuspendido(Jugador):-
-	jugador(Jugador),
-	tomo(Jugador,producto(Producto,CantidadTomada)),
-	maximo(Producto,MaximoPermitido),
-	MaximoPermitido<CantidadTomada.
+	tomo(Jugador,Tomado),
+	estaProhibido(Tomado).
 
-compuestoConSustanciaProhibida(Compuesto):-
-	composicion(Compuesto,Sustancias),
+estaProhibido(sustancia(Tipo)):-
+	sustanciaProhibida(Tipo).
+estaProhibido(compuesto(Tipo)):-
+	composicion(Tipo,Sustancias),
 	member(Sustancia,Sustancias),
 	sustanciaProhibida(Sustancia).
+estaProhibido(producto(Tipo,Cantidad)):-
+	maximo(Tipo,CantidadMaxima),
+	Cantidad,CantidadMaxima.
 
 %PUNTO3
 malaInfluencia(Jugador1,Jugador2):-
