@@ -64,7 +64,7 @@ estaProhibido(compuesto(Tipo)):-
 	sustanciaProhibida(Sustancia).
 estaProhibido(producto(Tipo,Cantidad)):-
 	maximo(Tipo,CantidadMaxima),
-	Cantidad,CantidadMaxima.
+	Cantidad>CantidadMaxima.
 
 %PUNTO3
 malaInfluencia(Jugador1,Jugador2):-
